@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChinaGo AI - Learn Chinese & Prepare for China</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #c1121f, #003049);
+      color: #fff;
+      padding: 32px 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .top-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .lang-btn {
+      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .lang-btn.active {
+      background: #fff;
+      color: #c1121f;
+      font-weight: bold;
+    }
+
+    nav {
+      background: #fff;
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    nav button {
+      white-space: nowrap;
+      border: none;
+      background: #eef2ff;
+      color: #1e3a8a;
+      padding: 9px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    nav button.active {
+      background: #1e3a8a;
+      color: #fff;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .section {
+      display: none;
+      animation: fade 0.2s ease-in-out;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.07);
+      border: 1px solid #eef2f7;
+    }
+
+    .card h2 {
+      font-size: 22px;
+      color: #003049;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 17px;
+      color: #c1121f;
+      margin-bottom: 8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+    }
+
+    .phrase {
+      border-left: 4px solid #c1121f;
+      background: #fff7f7;
+      border-radius: 12px;
+      padding: 13px;
+      margin-bottom: 10px;
+    }
+
+    .phrase .cn {
+      font-size: 20px;
+      font-weight: bold;
+      color: #111827;
+    }
+
+    .phrase .py {
+      color: #2563eb;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    .phrase .meaning {
+      color: #4b5563;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      background: #e0f2fe;
+      color: #075985;
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .checklist li {
+      list-style: none;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .checklist li::before {
+      content: "✓ ";
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    textarea, input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      font-size: 15px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .primary-btn {
+      width: 100%;
+      border: none;
+      background: #c1121f;
+      color: white;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .secondary-btn {
+      width: 100%;
+      border: none;
+      background: #003049;
+      color: white;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .result {
+      background: #f8fafc;
+      border: 1px dashed #94a3b8;
+      padding: 14px;
+      border-radius: 12px;
+      margin-top: 12px;
+      white-space: pre-wrap;
+    }
+
+    .vip-box {
+      background: linear-gradient(135deg, #fff7ed, #fffbeb);
+      border: 1px solid #facc15;
+    }
+
+    .locked {
+      filter: blur(3px);
+      user-select: none;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .unlock-success {
+      background: #dcfce7;
+      color: #166534;
+      padding: 10px;
+      border-radius: 12px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .pay-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .whatsapp {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      background: #22c55e;
+      color: #fff;
+      padding: 13px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .warning {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #9f1239;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 24px 12px;
+      font-size: 13px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ChinaGo AI</h1>
+  <p id="heroSub">Learn Chinese. Prepare for China. Study, work and business communication helper.</p>
+  <div class="top-actions">
+    <button class="lang-btn active" onclick="setLang('en')">English</button>
+    <button class="lang-btn" onclick="setLang('fr')">Français</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="showTab('home', this)" id="navHome">Home</button>
+  <button class="tab-btn" onclick="showTab('daily', this)" id="navDaily">Daily Chinese</button>
+  <button class="tab-btn" onclick="showTab('china', this)" id="navChina">Go China</button>
+  <button class="tab-btn" onclick="showTab('business', this)" id="navBusiness">Business</button>
+  <button class="tab-btn" onclick="showTab('checklist', this)" id="navChecklist">Checklist</button>
+  <button class="tab-btn" onclick="showTab('ai', this)" id="navAI">AI Helper</button>
+  <button class="tab-btn" onclick="showTab('vip', this)" id="navVIP">VIP</button>
+</nav>
+
+<main>
+
+  <section id="home" class="section active">
+    <div class="card">
+      <h2 id="homeTitle">Chinese learning assistant for people who want to go to China</h2>
+      <p id="homeText">
+        ChinaGo AI helps African students, workers and business people learn useful Chinese sentences and prepare basic materials before going to China.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3 id="homeCard1Title">For Students</h3>
+        <p id="homeCard1Text">Learn school communication Chinese, scholarship questions, registration phrases and daily campus language.</p>
+      </div>
+      <div class="card">
+        <h3 id="homeCard2Title">For Business</h3>
+        <p id="homeCard2Text">Learn buying, price negotiation, supplier communication and Guangzhou/Yiwu market phrases.</p>
+      </div>
+      <div class="card">
+        <h3 id="homeCard3Title">For New Travelers</h3>
+        <p id="homeCard3Text">Learn airport, hotel, taxi, phone card, hospital and emergency communication phrases.</p>
+      </div>
+    </div>
+
+    <div class="card vip-box">
+      <h3 id="quickStartTitle">Start Here</h3>
+      <p id="quickStartText">Use the free lessons first. If you need full phrases, checklist and AI sentence helper, unlock VIP.</p>
+      <button class="primary-btn" onclick="showTab('daily', document.getElementById('navDaily'))" id="startBtn">Start Learning</button>
+    </div>
+  </section>
+
+  <section id="daily" class="section">
+    <div class="card">
+      <h2 id="dailyTitle">Daily Chinese Phrases</h2>
+      <p class="small" id="dailySub">Useful Chinese sentences for beginners.</p>
+    </div>
+
+    <div id="dailyPhrases"></div>
+  </section>
+
+  <section id="china" class="section">
+    <div class="card">
+      <h2 id="chinaTitle">Go China Scenario Chinese</h2>
+      <p class="small" id="chinaSub">Airport, school, hotel, taxi and daily life phrases.</p>
+    </div>
+
+    <div id="chinaPhrases"></div>
+  </section>
+
+  <section id="business" class="section">
+    <div class="card">
+      <h2 id="businessTitle">Business & Market Chinese</h2>
+      <p class="small" id="businessSub">Useful phrases for Guangzhou, Yiwu, suppliers and product buying.</p>
+    </div>
+
+    <div id="businessPhrases"></div>
+  </section>
+
+  <section id="checklist" class="section">
+    <div class="card">
+      <h2 id="checklistTitle">China Preparation Checklist</h2>
+      <p id="checklistSub">Basic preparation list for learning and planning. This is not visa or legal advice.</p>
+    </div>
+
+    <div class="card">
+      <h3 id="studyTitle">Study Preparation</h3>
+      <ul class="checklist" id="studyList"></ul>
+    </div>
+
+    <div class="card">
+      <h3 id="travelTitle">Travel Preparation</h3>
+      <ul class="checklist" id="travelList"></ul>
+    </div>
+
+    <div class="card">
+      <h3 id="businessPrepTitle">Business Preparation</h3>
+      <ul class="checklist" id="businessList"></ul>
+    </div>
+
+    <div class="warning" id="disclaimer">
+      Disclaimer: This system only provides language learning and general preparation information. It does not guarantee visa approval, admission, employment or business results.
+    </div>
+  </section>
+
+  <section id="ai" class="section">
+    <div class="card">
+      <h2 id="aiTitle">AI Chinese Sentence Helper</h2>
+      <p id="aiSub">Enter an English or French sentence. This V1 uses local templates. Later we can connect real AI API.</p>
+
+      <select id="scene">
+        <option value="school">School / University</option>
+        <option value="business">Business / Supplier</option>
+        <option value="travel">Travel / Daily Life</option>
+        <option value="work">Work / Job</option>
+      </select>
+
+      <textarea id="userSentence" rows="4" placeholder="Example: I want to ask about scholarship."></textarea>
+      <button class="primary-btn" onclick="generateSentence()" id="generateBtn">Generate Chinese Sentence</button>
+      <div id="aiResult" class="result hidden"></div>
+    </div>
+
+    <div class="card">
+      <h3 id="templateTitle">Quick Templates</h3>
+      <button class="secondary-btn" onclick="quickTemplate('scholarship')" id="tpl1">Ask about scholarship</button>
+      <button class="secondary-btn" onclick="quickTemplate('price')" id="tpl2">Ask supplier price</button>
+      <button class="secondary-btn" onclick="quickTemplate('direction')" id="tpl3">Ask for direction</button>
+    </div>
+  </section>
+
+  <section id="vip" class="section">
+    <div class="card vip-box">
+      <h2 id="vipTitle">VIP Unlock</h2>
+      <p id="vipSub">Enter your member code to unlock full content.</p>
+
+      <input id="vipCode" placeholder="Enter member code" />
+      <button class="primary-btn" onclick="unlockVIP()" id="unlockBtn">Unlock VIP</button>
+      <div class="unlock-success" id="unlockMsg">VIP unlocked successfully.</div>
+
+      <div class="pay-box">
+        <h3 id="payTitle">How to buy VIP</h3>
+        <p id="payText">Contact us on WhatsApp to get the member code.</p>
+        <a class="whatsapp" id="whatsappLink" href="https://wa.me/224000000000" target="_blank">Contact WhatsApp</a>
+        <p class="small" style="margin-top:8px;" id="replaceText">Please replace the WhatsApp number in the code with your real number.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 id="vipContentTitle">VIP Content Preview</h3>
+      <div id="vipContent" class="locked">
+        <div class="phrase">
+          <div class="tag">VIP</div>
+          <div class="cn">我想申请中国大学。</div>
+          <div class="py">Wǒ xiǎng shēnqǐng Zhōngguó dàxué.</div>
+          <div class="meaning">I want to apply to a Chinese university.</div>
+        </div>
+        <div class="phrase">
+          <div class="tag">VIP</div>
+          <div class="cn">请给我最低批发价格。</div>
+          <div class="py">Qǐng gěi wǒ zuìdī pīfā jiàgé.</div>
+          <div class="meaning">Please give me the lowest wholesale price.</div>
+        </div>
+        <div class="phrase">
+          <div class="tag">VIP</div>
+          <div class="cn">我需要一份正式邀请函。</div>
+          <div class="py">Wǒ xūyào yí fèn zhèngshì yāoqǐnghán.</div>
+          <div class="meaning">I need an official invitation letter.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  ChinaGo AI V1.0 · Chinese Learning & China Preparation Helper
+</footer>
+
+<script>
+  const VALID_MEMBER_CODES = [
+    "CHINAGO2026",
+    "VIP999",
+    "AFRICA888",
+    "STUDENT666",
+    "BUSINESS520"
+  ];
+
+  let currentLang = "en";
+
+  const translations = {
+    en: {
+      heroSub: "Learn Chinese. Prepare for China. Study, work and business communication helper.",
+      navHome: "Home",
+      navDaily: "Daily Chinese",
+      navChina: "Go China",
+      navBusiness: "Business",
+      navChecklist: "Checklist",
+      navAI: "AI Helper",
+      navVIP: "VIP",
+      homeTitle: "Chinese learning assistant for people who want to go to China",
+      homeText: "ChinaGo AI helps African students, workers and business people learn useful Chinese sentences and prepare basic materials before going to China.",
+      homeCard1Title: "For Students",
+      homeCard1Text: "Learn school communication Chinese, scholarship questions, registration phrases and daily campus language.",
+      homeCard2Title: "For Business",
+      homeCard2Text: "Learn buying, price negotiation, supplier communication and Guangzhou/Yiwu market phrases.",
+      homeCard3Title: "For New Travelers",
+      homeCard3Text: "Learn airport, hotel, taxi, phone card, hospital and emergency communication phrases.",
+      quickStartTitle: "Start Here",
+      quickStartText: "Use the free lessons first. If you need full phrases, checklist and AI sentence helper, unlock VIP.",
+      startBtn: "Start Learning",
+      dailyTitle: "Daily Chinese Phrases",
+      dailySub: "Useful Chinese sentences for beginners.",
+      chinaTitle: "Go China Scenario Chinese",
+      chinaSub: "Airport, school, hotel, taxi and daily life phrases.",
+      businessTitle: "Business & Market Chinese",
+      businessSub: "Useful phrases for Guangzhou, Yiwu, suppliers and product buying.",
+      checklistTitle: "China Preparation Checklist",
+      checklistSub: "Basic preparation list for learning and planning. This is not visa or legal advice.",
+      studyTitle: "Study Preparation",
+      travelTitle: "Travel Preparation",
+      businessPrepTitle: "Business Preparation",
+      disclaimer: "Disclaimer: This system only provides language learning and general preparation information. It does not guarantee visa approval, admission, employment or business results.",
+      aiTitle: "AI Chinese Sentence Helper",
+      aiSub: "Enter an English or French sentence. This V1 uses local templates. Later we can connect real AI API.",
+      generateBtn: "Generate Chinese Sentence",
+      templateTitle: "Quick Templates",
+      tpl1: "Ask about scholarship",
+      tpl2: "Ask supplier price",
+      tpl3: "Ask for direction",
+      vipTitle: "VIP Unlock",
+      vipSub: "Enter your member code to unlock full content.",
+      unlockBtn: "Unlock VIP",
+      payTitle: "How to buy VIP",
+      payText: "Contact us on WhatsApp to get the member code.",
+      replaceText: "Please replace the WhatsApp number in the code with your real number.",
+      vipContentTitle: "VIP Content Preview"
+    },
+    fr: {
+      heroSub: "Apprendre le chinois. Préparer le voyage en Chine. Aide pour études, travail et business.",
+      navHome: "Accueil",
+      navDaily: "Chinois quotidien",
+      navChina: "Aller en Chine",
+      navBusiness: "Business",
+      navChecklist: "Liste",
+      navAI: "Assistant IA",
+      navVIP: "VIP",
+      homeTitle: "Assistant chinois pour les personnes qui veulent aller en Chine",
+      homeText: "ChinaGo AI aide les étudiants, travailleurs et commerçants africains à apprendre des phrases chinoises utiles et à préparer les documents de base.",
+      homeCard1Title: "Pour étudiants",
+      homeCard1Text: "Apprenez les phrases pour l'école, les bourses, l'inscription et la vie universitaire.",
+      homeCard2Title: "Pour business",
+      homeCard2Text: "Apprenez les achats, la négociation, la communication fournisseur et les marchés de Guangzhou/Yiwu.",
+      homeCard3Title: "Pour voyageurs",
+      homeCard3Text: "Apprenez les phrases pour aéroport, hôtel, taxi, carte SIM, hôpital et urgence.",
+      quickStartTitle: "Commencer ici",
+      quickStartText: "Utilisez d'abord les leçons gratuites. Pour plus de contenu, débloquez VIP.",
+      startBtn: "Commencer",
+      dailyTitle: "Phrases chinoises quotidiennes",
+      dailySub: "Phrases utiles pour débutants.",
+      chinaTitle: "Scènes pratiques en Chine",
+      chinaSub: "Aéroport, école, hôtel, taxi et vie quotidienne.",
+      businessTitle: "Chinois business et marché",
+      businessSub: "Phrases utiles pour Guangzhou, Yiwu, fournisseurs et achat.",
+      checklistTitle: "Liste de préparation pour la Chine",
+      checklistSub: "Liste générale pour apprendre et planifier. Ce n'est pas un conseil visa ou juridique.",
+      studyTitle: "Préparation études",
+      travelTitle: "Préparation voyage",
+      businessPrepTitle: "Préparation business",
+      disclaimer: "Avertissement : ce système fournit seulement l'apprentissage linguistique et des informations générales. Il ne garantit pas visa, admission, emploi ou résultat commercial.",
+      aiTitle: "Assistant de phrases chinoises",
+      aiSub: "Entrez une phrase en anglais ou français. Cette V1 utilise des modèles locaux. Plus tard, on peut connecter une vraie API IA.",
+      generateBtn: "Générer la phrase chinoise",
+      templateTitle: "Modèles rapides",
+      tpl1: "Demander une bourse",
+      tpl2: "Demander le prix fournisseur",
+      tpl3: "Demander la direction",
+      vipTitle: "Déblocage VIP",
+      vipSub: "Entrez votre code membre pour débloquer tout le contenu.",
+      unlockBtn: "Débloquer VIP",
+      payTitle: "Comment acheter VIP",
+      payText: "Contactez-nous sur WhatsApp pour obtenir le code membre.",
+      replaceText: "Remplacez le numéro WhatsApp dans le code par votre vrai numéro.",
+      vipContentTitle: "Aperçu du contenu VIP"
+    },
+    zh: {
+      heroSub: "学习中文，准备去中国，适合留学、工作、商务沟通。",
+      navHome: "首页",
+      navDaily: "日常中文",
+      navChina: "去中国",
+      navBusiness: "商务中文",
+      navChecklist: "资料清单",
+      navAI: "AI助手",
+      navVIP: "会员",
+      homeTitle: "给想去中国的人使用的中文学习助手",
+      homeText: "ChinaGo AI 帮助非洲学生、工作者和商人学习实用中文句子，并准备去中国前的基础资料。",
+      homeCard1Title: "适合学生",
+      homeCard1Text: "学习学校沟通、奖学金咨询、报到注册、校园生活中文。",
+      homeCard2Title: "适合做生意",
+      homeCard2Text: "学习采购、砍价、供应商沟通、广州/义乌市场中文。",
+      homeCard3Title: "适合第一次去中国",
+      homeCard3Text: "学习机场、酒店、打车、办电话卡、医院和紧急沟通句子。",
+      quickStartTitle: "从这里开始",
+      quickStartText: "先使用免费课程。如需完整短句、资料清单和 AI 句子助手，可以解锁会员。",
+      startBtn: "开始学习",
+      dailyTitle: "日常中文短句",
+      dailySub: "适合初学者的实用中文句子。",
+      chinaTitle: "去中国场景中文",
+      chinaSub: "机场、学校、酒店、打车和日常生活句子。",
+      businessTitle: "商务和市场中文",
+      businessSub: "适合广州、义乌、供应商沟通和采购的句子。",
+      checklistTitle: "去中国准备资料清单",
+      checklistSub: "这是学习和准备参考，不是签证或法律建议。",
+      studyTitle: "留学准备",
+      travelTitle: "出行准备",
+      businessPrepTitle: "商务准备",
+      disclaimer: "免责声明：本系统仅提供语言学习和一般准备信息，不保证签证通过、学校录取、就业或商业结果。",
+      aiTitle: "AI 中文句子助手",
+      aiSub: "输入英文或法文句子。V1 使用本地模板，后期可以接入真正 AI API。",
+      generateBtn: "生成中文句子",
+      templateTitle: "快速模板",
+      tpl1: "咨询奖学金",
+      tpl2: "询问供应商价格",
+      tpl3: "问路",
+      vipTitle: "会员解锁",
+      vipSub: "输入会员码解锁完整内容。",
+      unlockBtn: "解锁会员",
+      payTitle: "如何购买会员",
+      payText: "通过 WhatsApp 联系我们获取会员码。",
+      replaceText: "请把代码里的 WhatsApp 号码换成你自己的真实号码。",
+      vipContentTitle: "会员内容预览"
+    }
+  };
+
+  const phrases = {
+    daily: [
+      ["你好。", "Nǐ hǎo.", "Hello.", "Bonjour."],
+      ["谢谢。", "Xièxie.", "Thank you.", "Merci."],
+      ["我不会说中文。", "Wǒ bú huì shuō Zhōngwén.", "I cannot speak Chinese.", "Je ne parle pas chinois."],
+      ["请你写下来。", "Qǐng nǐ xiě xiàlái.", "Please write it down.", "Veuillez l'écrire."],
+      ["这个多少钱？", "Zhège duōshǎo qián?", "How much is this?", "Combien ça coûte ?"],
+      ["可以便宜一点吗？", "Kěyǐ piányi yìdiǎn ma?", "Can it be cheaper?", "C'est possible moins cher ?"],
+      ["我需要帮助。", "Wǒ xūyào bāngzhù.", "I need help.", "J'ai besoin d'aide."],
+      ["我来自非洲。", "Wǒ láizì Fēizhōu.", "I come from Africa.", "Je viens d'Afrique."]
+    ],
+    china: [
+      ["我想去中国。", "Wǒ xiǎng qù Zhōngguó.", "I want to go to China.", "Je veux aller en Chine."],
+      ["我来中国学习。", "Wǒ lái Zhōngguó xuéxí.", "I came to China to study.", "Je suis venu en Chine pour étudier."],
+      ["我想咨询奖学金。", "Wǒ xiǎng zīxún jiǎngxuéjīn.", "I want to ask about scholarship.", "Je veux demander des informations sur la bourse."],
+      ["学校在哪里？", "Xuéxiào zài nǎlǐ?", "Where is the school?", "Où est l'école ?"],
+      ["我要办理电话卡。", "Wǒ yào bànlǐ diànhuà kǎ.", "I want to get a SIM card.", "Je veux acheter une carte SIM."],
+      ["请带我去这个地址。", "Qǐng dài wǒ qù zhège dìzhǐ.", "Please take me to this address.", "Amenez-moi à cette adresse."],
+      ["我需要去医院。", "Wǒ xūyào qù yīyuàn.", "I need to go to the hospital.", "Je dois aller à l'hôpital."],
+      ["我的护照在这里。", "Wǒ de hùzhào zài zhèlǐ.", "My passport is here.", "Mon passeport est ici."]
+    ],
+    business: [
+      ["我是来采购的。", "Wǒ shì lái cǎigòu de.", "I came to purchase goods.", "Je suis venu pour acheter des marchandises."],
+      ["你们是工厂吗？", "Nǐmen shì gōngchǎng ma?", "Are you a factory?", "Êtes-vous une usine ?"],
+      ["最低价格是多少？", "Zuìdī jiàgé shì duōshǎo?", "What is the lowest price?", "Quel est le prix le plus bas ?"],
+      ["可以批发吗？", "Kěyǐ pīfā ma?", "Can you wholesale?", "Pouvez-vous vendre en gros ?"],
+      ["我要看样品。", "Wǒ yào kàn yàngpǐn.", "I want to see samples.", "Je veux voir des échantillons."],
+      ["发货到非洲多少钱？", "Fāhuò dào Fēizhōu duōshǎo qián?", "How much to ship to Africa?", "Combien pour expédier en Afrique ?"],
+      ["请给我产品目录。", "Qǐng gěi wǒ chǎnpǐn mùlù.", "Please give me the product catalog.", "Donnez-moi le catalogue des produits."],
+      ["我想长期合作。", "Wǒ xiǎng chángqī hézuò.", "I want long-term cooperation.", "Je veux une coopération à long terme."]
+    ]
+  };
+
+  const checklist = {
+    en: {
+      study: [
+        "Passport with enough validity",
+        "School application information",
+        "Diploma or certificate",
+        "Transcript or academic record",
+        "Basic Chinese learning plan",
+        "Scholarship questions list",
+        "School contact email template"
+      ],
+      travel: [
+        "Flight information",
+        "Hotel or school address",
+        "Emergency contact",
+        "Chinese address screenshot",
+        "Translation of important sentences",
+        "Phone card preparation",
+        "Basic RMB/payment knowledge"
+      ],
+      business: [
+        "Product list",
+        "Target market and price range",
+        "Supplier questions",
+        "Shipping method questions",
+        "Sample checking list",
+        "Payment risk checklist",
+        "Chinese negotiation phrases"
+      ]
+    },
+    fr: {
+      study: [
+        "Passeport valide",
+        "Informations d'inscription à l'école",
+        "Diplôme ou certificat",
+        "Relevé de notes",
+        "Plan d'apprentissage du chinois",
+        "Liste de questions sur la bourse",
+        "Modèle d'email pour contacter l'école"
+      ],
+      travel: [
+        "Informations de vol",
+        "Adresse de l'hôtel ou de l'école",
+        "Contact d'urgence",
+        "Capture d'écran de l'adresse chinoise",
+        "Traduction des phrases importantes",
+        "Préparation carte SIM",
+        "Connaissance de base RMB/paiement"
+      ],
+      business: [
+        "Liste des produits",
+        "Marché cible et prix",
+        "Questions fournisseur",
+        "Questions sur l'expédition",
+        "Liste de vérification des échantillons",
+        "Liste de risque paiement",
+        "Phrases chinoises de négociation"
+      ]
+    },
+    zh: {
+      study: [
+        "有效期足够的护照",
+        "学校申请信息",
+        "学历证明或证书",
+        "成绩单",
+        "中文学习计划",
+        "奖学金问题清单",
+        "联系学校邮件模板"
+      ],
+      travel: [
+        "航班信息",
+        "酒店或学校地址",
+        "紧急联系人",
+        "中文地址截图",
+        "重要句子翻译",
+        "电话卡准备",
+        "人民币/支付基础知识"
+      ],
+      business: [
+        "产品清单",
+        "目标市场和价格区间",
+        "供应商问题",
+        "物流运输问题",
+        "样品检查清单",
+        "付款风险清单",
+        "中文砍价句子"
+      ]
+    }
+  };
+
+  function showTab(id, btn) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+    event.target.classList.add("active");
+
+    const t = translations[lang];
+    Object.keys(t).forEach(key => {
+      const el = document.getElementById(key);
+      if (el) el.textContent = t[key];
+    });
+
+    renderPhrases();
+    renderChecklist();
+  }
+
+  function renderPhrases() {
+    renderPhraseGroup("dailyPhrases", phrases.daily);
+    renderPhraseGroup("chinaPhrases", phrases.china);
+    renderPhraseGroup("businessPhrases", phrases.business);
+  }
+
+  function renderPhraseGroup(containerId, list) {
+    const box = document.getElementById(containerId);
+    box.innerHTML = "";
+    list.forEach((item, index) => {
+      const meaning = currentLang === "fr" ? item[3] : currentLang === "zh" ? item[2] : item[2];
+      const div = document.createElement("div");
+      div.className = "phrase";
+      div.innerHTML = `
+        <div class="tag">#${index + 1}</div>
+        <div class="cn">${item[0]}</div>
+        <div class="py">${item[1]}</div>
+        <div class="meaning">${meaning}</div>
+      `;
+      box.appendChild(div);
+    });
+  }
+
+  function renderChecklist() {
+    const data = checklist[currentLang];
+    fillList("studyList", data.study);
+    fillList("travelList", data.travel);
+    fillList("businessList", data.business);
+  }
+
+  function fillList(id, arr) {
+    const ul = document.getElementById(id);
+    ul.innerHTML = "";
+    arr.forEach(text => {
+      const li = document.createElement("li");
+      li.textContent = text;
+      ul.appendChild(li);
+    });
+  }
+
+  function generateSentence() {
+    const input = document.getElementById("userSentence").value.trim();
+    const scene = document.getElementById("scene").value;
+    const result = document.getElementById("aiResult");
+
+    if (!input) {
+      result.classList.remove("hidden");
+      result.textContent = currentLang === "fr" ? "Veuillez entrer une phrase." : currentLang === "zh" ? "请输入一句话。" : "Please enter a sentence.";
+      return;
+    }
+
+    let output = "";
+
+    if (scene === "school") {
+      output = "中文：我想咨询一下学校申请和奖学金。\n拼音：Wǒ xiǎng zīxún yíxià xuéxiào shēnqǐng hé jiǎngxuéjīn.\nEnglish: I want to ask about school application and scholarship.\nFrench: Je veux demander des informations sur l'inscription et la bourse.";
+    } else if (scene === "business") {
+      output = "中文：请问这个产品的最低批发价格是多少？\n拼音：Qǐngwèn zhège chǎnpǐn de zuìdī pīfā jiàgé shì duōshǎo?\nEnglish: What is the lowest wholesale price for this product?\nFrench: Quel est le prix de gros le plus bas pour ce produit ?";
+    } else if (scene === "travel") {
+      output = "中文：请问这个地址怎么走？\n拼音：Qǐngwèn zhège dìzhǐ zěnme zǒu?\nEnglish: How can I get to this address?\nFrench: Comment aller à cette adresse ?";
+    } else {
+      output = "中文：我想了解一下这个工作的要求。\n拼音：Wǒ xiǎng liǎojiě yíxià zhège gōngzuò de yāoqiú.\nEnglish: I want to understand the requirements of this job.\nFrench: Je veux comprendre les exigences de ce travail.";
+    }
+
+    result.classList.remove("hidden");
+    result.textContent = "Your sentence: " + input + "\n\n" + output + "\n\nV1 note: This is template mode. Next version can connect real AI API.";
+  }
+
+  function quickTemplate(type) {
+    const input = document.getElementById("userSentence");
+    if (type === "scholarship") input.value = "I want to ask about scholarship.";
+    if (type === "price") input.value = "I want to ask the supplier for the lowest price.";
+    if (type === "direction") input.value = "I want to ask how to go to this address.";
+    generateSentence();
+  }
+
+  function unlockVIP() {
+    const code = document.getElementById("vipCode").value.trim().toUpperCase();
+    const msg = document.getElementById("unlockMsg");
+    const content = document.getElementById("vipContent");
+
+    if (VALID_MEMBER_CODES.includes(code)) {
+      localStorage.setItem("chinago_vip", "yes");
+      msg.style.display = "block";
+      content.classList.remove("locked");
+    } else {
+      alert(currentLang === "fr" ? "Code incorrect." : currentLang === "zh" ? "会员码错误。" : "Invalid member code.");
+    }
+  }
+
+  function checkVIP() {
+    if (localStorage.getItem("chinago_vip") === "yes") {
+      document.getElementById("vipContent").classList.remove("locked");
+      document.getElementById("unlockMsg").style.display = "block";
+    }
+  }
+
+  renderPhrases();
+  renderChecklist();
+  checkVIP();
+</script>
+
+</body>
+</html>
