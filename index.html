@@ -3,9 +3,57 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ChinaGo AI V1.3</title>
+<title>ChinaGo AI V1.4</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,"Microsoft YaHei",sans-serif;background:#f3f6fb;color:#172033;line-height:1.65}header{background:radial-gradient(circle at top left,rgba(255,255,255,.18),transparent 28%),linear-gradient(135deg,#b80f1f,#06243f);color:#fff;padding:28px 16px 24px;text-align:center}header h1{font-size:34px;margin-bottom:8px}header p{font-size:15px;opacity:.96;max-width:720px;margin:0 auto}.lang-row,.hero-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.lang-btn{border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.12);color:#fff;padding:9px 17px;border-radius:999px;cursor:pointer;font-size:14px}.lang-btn.active{background:#fff;color:#b80f1f;font-weight:700}.hero-btn{border:none;padding:12px 18px;border-radius:14px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;min-width:132px}.primary{background:#fff;color:#b80f1f}.green{background:#22c55e!important;color:#fff!important}.dark{background:#0f172a!important;color:#fff!important}.nav-wrap{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(0,0,0,.07);padding:10px 8px}nav{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav button{flex:0 0 auto;border:none;background:#eef3ff;color:#17336f;padding:9px 14px;border-radius:999px;cursor:pointer;font-size:14px}nav button.active{background:#1e3a8a;color:#fff;font-weight:700}main{max-width:1020px;margin:0 auto;padding:18px 14px 90px}.section{display:none}.section.active{display:block}.card{background:#fff;border:1px solid #e7edf7;box-shadow:0 8px 24px rgba(15,23,42,.07);border-radius:20px;padding:20px;margin-bottom:15px}.card h2{font-size:25px;line-height:1.3;color:#07324a;margin-bottom:8px}.card h3{font-size:18px;color:#b80f1f;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.mini-card{background:#fff;border:1px solid #e7edf7;border-radius:18px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,.06)}.mini-card h3{font-size:18px;color:#b80f1f;margin-bottom:8px}.badge{display:inline-block;background:#e0f2fe;color:#075985;padding:4px 9px;border-radius:999px;font-size:12px;margin-bottom:8px;font-weight:700}.phrase{border-left:5px solid #c1121f;background:#fff7f7;border-radius:15px;padding:15px;margin-bottom:11px}.phrase .cn{font-size:22px;font-weight:800;color:#111827}.phrase .py{color:#2563eb;font-size:15px;margin-top:4px}.phrase .meaning{color:#4b5563;font-size:14px;margin-top:4px}.checklist li{list-style:none;background:#f8fafc;border:1px solid #e5e7eb;padding:11px 12px;border-radius:13px;margin-bottom:9px}.checklist li:before{content:"✓ ";color:#16a34a;font-weight:900}.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}.price-card{border:1px solid #e5e7eb;border-radius:18px;padding:18px;background:#fff}.price-card.hot{border:2px solid #f59e0b;background:#fffbeb}.price{font-size:30px;font-weight:900;color:#0f172a;margin:6px 0}.small{font-size:13px;color:#6b7280}textarea,input,select{width:100%;padding:12px;border-radius:13px;border:1px solid #cbd5e1;font-size:15px;margin:8px 0 10px;background:#fff}.btn{border:none;width:100%;padding:13px 15px;border-radius:14px;font-weight:800;cursor:pointer;font-size:15px;margin-top:8px}.red{background:#c1121f!important;color:#fff!important}.blue{background:#1e3a8a!important;color:#fff!important}.light{background:#eef3ff!important;color:#17336f!important}.result{background:#f8fafc;border:1px dashed #94a3b8;border-radius:14px;padding:14px;margin-top:12px;white-space:pre-wrap}.hidden{display:none}.locked{filter:blur(3px);user-select:none;pointer-events:none;opacity:.55}.unlock-success{display:none;background:#dcfce7;color:#166534;padding:10px 12px;border-radius:13px;margin-top:10px;font-weight:700}.warning{background:#fff1f2;border:1px solid #fecdd3;color:#9f1239;padding:14px;border-radius:15px;font-size:14px}.bottom-bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e5e7eb;box-shadow:0 -5px 18px rgba(0,0,0,.08);padding:9px 10px;display:flex;gap:8px;z-index:40}.bottom-bar button,.bottom-bar a{flex:1;border:none;border-radius:13px;padding:11px 8px;font-size:13px;font-weight:800;text-align:center;text-decoration:none}.bottom-bar .learn{background:#eef3ff;color:#17336f}.bottom-bar .buy{background:#c1121f;color:#fff}.bottom-bar .wa{background:#22c55e;color:#fff}footer{text-align:center;color:#6b7280;font-size:13px;padding:24px 10px}.copybox{background:#0f172a;color:#e5e7eb;border-radius:14px;padding:13px;font-size:13px;overflow:auto;margin-top:10px;white-space:pre-wrap}
+
+    .package-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .package-price{
+      background:#111827;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:999px;
+      font-weight:900;
+    }
+    .template-block{
+      background:#f8fafc;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:13px;
+      margin:10px 0;
+      white-space:pre-wrap;
+      font-size:14px;
+      color:#1f2937;
+    }
+    .vip-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:12px;
+    }
+    .table-wrap{overflow:auto;margin-top:10px}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:680px;
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    th,td{
+      border:1px solid #e5e7eb;
+      padding:9px;
+      text-align:left;
+      font-size:13px;
+      vertical-align:top;
+    }
+    th{background:#eef3ff;color:#17336f}
 </style>
 </head>
 <body>
@@ -19,7 +67,201 @@
 <section id="phrases" class="section"><div class="card"><h2 id="phrasesTitle">Free Chinese Phrases</h2><p id="phrasesSub">Daily Chinese for beginners. Use it as free traffic content.</p></div><div id="dailyPhrases"></div></section>
 <section id="templates" class="section"><div class="card"><h2 id="templatesTitle">Ready-to-copy Templates</h2><p id="templatesSub">These templates are the real selling point. Free preview is shown. VIP unlocks more.</p></div><div class="card"><h3 id="emailTitle">School email template</h3><div class="copybox" id="schoolEmail"></div><button class="btn blue" onclick="copyText('schoolEmail')" id="copyEmailBtn">Copy Template</button></div><div class="card"><h3 id="supplierTitle">Supplier WhatsApp template</h3><div class="copybox" id="supplierMsg"></div><button class="btn blue" onclick="copyText('supplierMsg')" id="copySupplierBtn">Copy Template</button></div><div class="card"><h3 id="vipTemplateTitle">VIP Templates Preview</h3><div id="vipTemplateBox" class="locked"><div class="copybox">1. Scholarship follow-up email\n2. University self-introduction\n3. Supplier price negotiation message\n4. Shipping and sample checking script\n5. Chinese company interview self-introduction\n6. 7-day China preparation plan</div></div></div></section>
 <section id="ai" class="section"><div class="card"><h2 id="aiTitle">AI Chinese Sentence Helper</h2><p id="aiSub">V1.1 uses strong local templates. Later version can connect real AI API for unlimited sentence generation.</p><select id="scene"><option value="study">Study / Scholarship</option><option value="business">Business / Supplier</option><option value="work">Work / Chinese Company</option><option value="travel">Travel / Daily Life</option></select><textarea id="userSentence" rows="4" placeholder="Example: I want to ask the school about scholarship."></textarea><button class="btn red" onclick="generateSentence()" id="generateBtn">Generate Chinese</button><div id="aiResult" class="result hidden"></div></div><div class="card"><h3 id="quickTitle">Quick generation</h3><button class="btn light" onclick="quickTemplate('scholarship')" id="q1">Ask school about scholarship</button><button class="btn light" onclick="quickTemplate('supplier')" id="q2">Ask supplier for lowest price</button><button class="btn light" onclick="quickTemplate('interview')" id="q3">Chinese company interview</button></div></section>
-<section id="vip" class="section"><div class="card"><span class="badge" id="vipBadge">VIP Preparation Kit</span><h2 id="vipTitle">Sell preparation, not only Chinese lessons</h2><p id="vipSub">Users pay for ready-made China study, business and work templates.</p></div><div class="price-grid"><div class="price-card"><span class="badge" id="plan1Badge">Starter</span><h3 id="plan1Title">Chinese Phrase Pack</h3><div class="price">$3</div><p id="plan1Text">100 Chinese phrases with pinyin, English and French.</p><button class="btn green" onclick="buyPlan('Starter $3')" id="plan1Btn">Buy on WhatsApp</button></div><div class="price-card hot"><span class="badge" id="plan2Badge">Best seller</span><h3 id="plan2Title">China Preparation Kit</h3><div class="price">$9</div><p id="plan2Text">Study checklist, school emails, supplier scripts, Chinese phrases and 7-day plan.</p><button class="btn red" onclick="buyPlan('China Preparation Kit $9')" id="plan2Btn">Buy on WhatsApp</button></div><div class="price-card"><span class="badge" id="plan3Badge">Advanced</span><h3 id="plan3Title">Business Buyer Kit</h3><div class="price">$19</div><p id="plan3Text">Supplier negotiation, wholesale inquiry, sample checking and shipping communication templates.</p><button class="btn dark" onclick="buyPlan('Business Buyer Kit $19')" id="plan3Btn">Buy on WhatsApp</button></div></div><div class="card"><h3 id="unlockTitle">Member code unlock</h3><p id="unlockSub">After payment, send a member code to the buyer.</p><input id="vipCode" placeholder="Enter VIP code"/><button class="btn red" onclick="unlockVIP()" id="unlockBtn">Unlock VIP</button><div class="unlock-success" id="unlockMsg">VIP unlocked successfully.</div></div><div class="card"><h3 id="vipContentTitle">VIP content preview</h3><div id="vipContent" class="locked"><div class="phrase"><span class="badge">VIP</span><div class="cn">我想申请中国大学，请问需要哪些材料？</div><div class="py">Wǒ xiǎng shēnqǐng Zhōngguó dàxué, qǐngwèn xūyào nǎxiē cáiliào?</div><div class="meaning">I want to apply to a Chinese university. What materials are required?</div></div><div class="phrase"><span class="badge">VIP</span><div class="cn">如果我大量采购，你们可以给我最低批发价吗？</div><div class="py">Rúguǒ wǒ dàliàng cǎigòu, nǐmen kěyǐ gěi wǒ zuìdī pīfā jià ma?</div><div class="meaning">If I buy in large quantity, can you give me the lowest wholesale price?</div></div></div></div><div class="warning" id="riskText">Disclaimer: ChinaGo AI only provides language learning, document checklist and communication templates. It does not guarantee visa approval, school admission, scholarship, employment or business results.</div></section>
+<section id="vip" class="section"><div class="card"><span class="badge" id="vipBadge">VIP Preparation Kit</span><h2 id="vipTitle">Sell preparation, not only Chinese lessons</h2><p id="vipSub">Users pay for real ready-made content: Chinese phrase pack, China preparation kit and business buyer kit.</p></div><div class="price-grid"><div class="price-card"><span class="badge" id="plan1Badge">Starter</span><h3 id="plan1Title">Chinese Phrase Pack</h3><div class="price">$3</div><p id="plan1Text">100 Chinese phrases with pinyin, English and French.</p><button class="btn green" onclick="buyPlan('Starter $3')" id="plan1Btn">Buy on WhatsApp</button></div><div class="price-card hot"><span class="badge" id="plan2Badge">Best seller</span><h3 id="plan2Title">China Preparation Kit</h3><div class="price">$9</div><p id="plan2Text">Study checklist, school emails, supplier scripts, Chinese phrases and 7-day plan.</p><button class="btn red" onclick="buyPlan('China Preparation Kit $9')" id="plan2Btn">Buy on WhatsApp</button></div><div class="price-card"><span class="badge" id="plan3Badge">Advanced</span><h3 id="plan3Title">Business Buyer Kit</h3><div class="price">$19</div><p id="plan3Text">Supplier negotiation, wholesale inquiry, sample checking and shipping communication templates.</p><button class="btn dark" onclick="buyPlan('Business Buyer Kit $19')" id="plan3Btn">Buy on WhatsApp</button></div></div><div class="card"><h3 id="unlockTitle">Member code unlock</h3><p id="unlockSub">After payment, send a member code to the buyer.</p><input id="vipCode" placeholder="Enter VIP code"/><button class="btn red" onclick="unlockVIP()" id="unlockBtn">Unlock VIP</button><div class="unlock-success" id="unlockMsg">VIP unlocked successfully.</div></div><div class="card">
+<h3 id="vipContentTitle">VIP Real Content Packages</h3>
+    <div id="vipContent" class="locked">
+
+      <div class="card">
+        <div class="package-title">
+          <h3 id="pack3Title">$3 Chinese Phrase Pack</h3>
+          <span class="package-price">$3</span>
+        </div>
+        <p class="sub" id="pack3Sub">Useful Chinese phrases for airport, school, hotel, taxi, shopping and emergency. Chinese + Pinyin + English/French meaning.</p>
+
+        <div class="vip-grid">
+          <div>
+            <div class="phrase"><span class="badge">Airport</span><div class="cn">我来中国学习。</div><div class="py">Wǒ lái Zhōngguó xuéxí.</div><div class="meaning">I came to China to study.</div></div>
+            <div class="phrase"><span class="badge">Airport</span><div class="cn">这是我的护照和录取通知书。</div><div class="py">Zhè shì wǒ de hùzhào hé lùqǔ tōngzhīshū.</div><div class="meaning">This is my passport and admission letter.</div></div>
+            <div class="phrase"><span class="badge">Taxi</span><div class="cn">请带我去这个地址。</div><div class="py">Qǐng dài wǒ qù zhège dìzhǐ.</div><div class="meaning">Please take me to this address.</div></div>
+            <div class="phrase"><span class="badge">Hotel</span><div class="cn">我已经预订了房间。</div><div class="py">Wǒ yǐjīng yùdìng le fángjiān.</div><div class="meaning">I have booked a room.</div></div>
+          </div>
+          <div>
+            <div class="phrase"><span class="badge">School</span><div class="cn">我要去学校报到。</div><div class="py">Wǒ yào qù xuéxiào bàodào.</div><div class="meaning">I need to register at the school.</div></div>
+            <div class="phrase"><span class="badge">Phone Card</span><div class="cn">我想办理一张电话卡。</div><div class="py">Wǒ xiǎng bànlǐ yì zhāng diànhuà kǎ.</div><div class="meaning">I want to get a SIM card.</div></div>
+            <div class="phrase"><span class="badge">Shopping</span><div class="cn">这个可以便宜一点吗？</div><div class="py">Zhège kěyǐ piányi yìdiǎn ma?</div><div class="meaning">Can this be cheaper?</div></div>
+            <div class="phrase"><span class="badge">Help</span><div class="cn">我不会说中文，请你写下来。</div><div class="py">Wǒ bú huì shuō Zhōngwén, qǐng nǐ xiě xiàlái.</div><div class="meaning">I cannot speak Chinese. Please write it down.</div></div>
+          </div>
+        </div>
+
+        <div class="template-block" id="phrasePackMore">More categories included:
+1. Airport and entry
+2. School registration
+3. Hotel and taxi
+4. Phone card and payment
+5. Shopping and bargaining
+6. Hospital and emergency
+7. Asking for help
+8. Daily polite Chinese</div>
+        <button class="btn blue" onclick="copyText('phrasePackMore')">Copy $3 pack summary</button>
+      </div>
+
+      <div class="card">
+        <div class="package-title">
+          <h3 id="pack9Title">$9 China Preparation Kit</h3>
+          <span class="package-price">$9</span>
+        </div>
+        <p class="sub" id="pack9Sub">For students and new travelers: checklist, school email templates, scholarship questions, self-introduction and 7-day preparation plan.</p>
+
+        <h3>1. Study checklist</h3>
+        <ul class="checklist">
+          <li>Valid passport</li>
+          <li>School application link or admission contact</li>
+          <li>Diploma / graduation certificate</li>
+          <li>Transcript / academic record</li>
+          <li>Passport photo</li>
+          <li>Medical check plan if required</li>
+          <li>Scholarship requirement list</li>
+          <li>Chinese self-introduction</li>
+          <li>Emergency contact and school address</li>
+        </ul>
+
+        <h3>2. School inquiry email</h3>
+        <div class="template-block" id="studyEmailTpl">Subject: Inquiry about admission and scholarship
+
+Dear Admissions Office,
+
+My name is [Your Name]. I am from [Country]. I am interested in applying to your university.
+
+Could you please tell me:
+1. What programs are available for international students?
+2. What documents do I need to prepare?
+3. What is the application deadline?
+4. Are there scholarship opportunities?
+5. Who can I contact for more information?
+
+Thank you very much.
+
+Best regards,
+[Your Name]</div>
+        <button class="btn blue" onclick="copyText('studyEmailTpl')">Copy school email</button>
+
+        <h3>3. Scholarship follow-up message</h3>
+        <div class="template-block" id="scholarshipTpl">Hello, I would like to ask about scholarship opportunities for international students.
+Could you please tell me the requirements, deadline and application steps?
+Thank you.</div>
+        <button class="btn blue" onclick="copyText('scholarshipTpl')">Copy scholarship message</button>
+
+        <h3>4. Chinese self-introduction</h3>
+        <div class="template-block" id="selfIntroTpl">大家好，我叫 [Name]，我来自 [Country]。
+我想去中国学习，因为我对中国文化、中文和未来发展机会很感兴趣。
+我会努力学习中文，也希望认识更多中国朋友。
+谢谢大家。</div>
+        <button class="btn blue" onclick="copyText('selfIntroTpl')">Copy Chinese self-introduction</button>
+
+        <h3>5. 7-day China preparation plan</h3>
+        <div class="template-block" id="sevenDayTpl">Day 1: Confirm your goal: study, business, work or travel.
+Day 2: Prepare passport, school/company address and emergency contact.
+Day 3: Learn 20 survival Chinese phrases.
+Day 4: Prepare school email or supplier message.
+Day 5: Save hotel/school address in Chinese.
+Day 6: Prepare payment, phone card and transport questions.
+Day 7: Review documents, screenshots and important Chinese sentences.</div>
+        <button class="btn blue" onclick="copyText('sevenDayTpl')">Copy 7-day plan</button>
+      </div>
+
+      <div class="card">
+        <div class="package-title">
+          <h3 id="pack19Title">$19 Business Buyer Kit</h3>
+          <span class="package-price">$19</span>
+        </div>
+        <p class="sub" id="pack19Sub">For people who want to contact Chinese suppliers, buy wholesale products, ask price, check samples, ship to Africa and reduce payment risk.</p>
+
+        <h3>1. Supplier inquiry template</h3>
+        <div class="template-block" id="supplierInquiryTpl">Hello, I am interested in your product.
+
+Please send me:
+1. Wholesale price
+2. MOQ / minimum order quantity
+3. Sample price
+4. Product catalog
+5. Product photos and videos
+6. Shipping cost to Africa
+7. Delivery time
+8. Payment method
+
+If the price and quality are good, I want long-term cooperation.</div>
+        <button class="btn blue" onclick="copyText('supplierInquiryTpl')">Copy supplier inquiry</button>
+
+        <h3>2. Price negotiation template</h3>
+        <div class="template-block" id="priceNegotiateTpl">Thank you for your quotation.
+
+Your price is a little high for my market.
+If I buy in larger quantity, can you give me the lowest wholesale price?
+Please also tell me your best price for:
+100 pieces
+500 pieces
+1000 pieces
+
+If the price is good, I can place a trial order first.</div>
+        <button class="btn blue" onclick="copyText('priceNegotiateTpl')">Copy negotiation message</button>
+
+        <h3>3. Sample checking list</h3>
+        <ul class="checklist">
+          <li>Product name and model are correct</li>
+          <li>Size, color and material match the order</li>
+          <li>Packaging is complete</li>
+          <li>No visible damage</li>
+          <li>Product works normally</li>
+          <li>Logo or label is correct if required</li>
+          <li>Photos/videos are saved before bulk order</li>
+          <li>Supplier confirms warranty or after-sale terms</li>
+        </ul>
+
+        <h3>4. Shipping questions</h3>
+        <div class="template-block" id="shippingTpl">Please help me confirm the shipping details:
+
+1. Can you ship to [Country] in Africa?
+2. What is the shipping cost by air?
+3. What is the shipping cost by sea?
+4. How many days does it take?
+5. Can you provide tracking number?
+6. Do you support DDP / door-to-door shipping?
+7. What documents are included?</div>
+        <button class="btn blue" onclick="copyText('shippingTpl')">Copy shipping questions</button>
+
+        <h3>5. Payment risk reminders</h3>
+        <ul class="checklist">
+          <li>Do not pay full amount to unknown supplier at the beginning</li>
+          <li>Ask for product photos, videos and company information</li>
+          <li>Start with sample or small trial order</li>
+          <li>Keep chat records and payment proof</li>
+          <li>Prefer platform transaction when possible</li>
+          <li>Compare at least 3 suppliers before bulk order</li>
+          <li>Check shipping cost before paying</li>
+          <li>Avoid unrealistic prices that are too cheap</li>
+        </ul>
+
+        <h3>6. Purchase record table</h3>
+        <div class="table-wrap">
+          <table>
+            <tr>
+              <th>Product</th><th>Supplier</th><th>Unit Price</th><th>MOQ</th><th>Sample</th><th>Shipping</th><th>Delivery Time</th><th>Risk Note</th>
+            </tr>
+            <tr>
+              <td>Phone accessories</td><td>Supplier A</td><td>$___</td><td>___ pcs</td><td>Yes / No</td><td>Air / Sea</td><td>___ days</td><td>Need sample first</td>
+            </tr>
+            <tr>
+              <td>Clothes</td><td>Supplier B</td><td>$___</td><td>___ pcs</td><td>Yes / No</td><td>Air / Sea</td><td>___ days</td><td>Check size chart</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="warning" id="riskText">Disclaimer: ChinaGo AI only provides language learning, document checklist and communication templates. It does not guarantee visa approval, school admission, scholarship, employment or business results.</div></section>
 
 <section id="growth" class="section">
   <div class="card">
@@ -105,7 +347,7 @@ Free phrases are available. VIP unlocks the full preparation kit.</div>
   <div class="warning" id="strongRiskText">Important: Do not send passport, ID card, bank password or private documents through this website. Contact only through the official WhatsApp number shown on this page.</div>
 </section>
 
-</main><div class="bottom-bar"><button class="learn" onclick="showTab('phrases',navPhrases)" id="bottomLearn">Free</button><button class="buy" onclick="showTab('vip',navVIP)" id="bottomBuy">Buy VIP</button><a class="wa" id="bottomWA" href="https://wa.me/224621769771?text=Hello%20ChinaGo%20AI%2C%20I%20want%20VIP%20member%20code." target="_blank">WhatsApp</a></div><footer>ChinaGo AI V1.3 · Growth & Conversion Edition</footer>
+</main><div class="bottom-bar"><button class="learn" onclick="showTab('phrases',navPhrases)" id="bottomLearn">Free</button><button class="buy" onclick="showTab('vip',navVIP)" id="bottomBuy">Buy VIP</button><a class="wa" id="bottomWA" href="https://wa.me/224621769771?text=Hello%20ChinaGo%20AI%2C%20I%20want%20VIP%20member%20code." target="_blank">WhatsApp</a></div><footer>ChinaGo AI V1.4 · Real VIP Content Edition</footer>
 <script>
 const VALID_MEMBER_CODES=["CHINAGO2026","VIP999","AFRICA888","STUDENT666","BUSINESS520","CHINAKIT9"];let currentLang="en";
 const T={en:{heroSub:"Want to study, work or do business in China? Get Chinese phrases, preparation checklist, school email templates and business scripts.",heroStudy:"Study in China",heroBusiness:"Business in China",navHome:"Home",navStudy:"Study",navBusiness:"Business",navWork:"Work",navPhrases:"Chinese",navTemplates:"Templates",navAI:"AI Helper",navVIP:"VIP",homeBadge:"China preparation system",homeTitle:"Not just learning Chinese. Prepare for real China opportunities.",homeText:"This tool helps African users prepare for China study, China business, Chinese company work and daily communication. Free phrases attract users. VIP sells preparation templates and practical scripts.",homeBuyBtn:"View VIP Plans",homeFreeBtn:"Use Free Chinese Phrases",who1Title:"Students",who1Text:"Scholarship questions, school email, registration Chinese, self-introduction and preparation checklist.",who2Title:"Business Buyers",who2Text:"Supplier messages, price negotiation, sample checking, shipping questions and payment risk reminders.",who3Title:"Workers",who3Text:"Chinese company interview phrases, daily work communication, leave request and report templates.",whyTitle:"Why users may pay instead of using free AI?",whyText:"Because this is organized by real scenarios: study, business, work and travel. Users do not need to know how to ask AI. They can copy ready-made Chinese, pinyin, emails and WhatsApp scripts directly.",studyTitle:"Study in China Preparation",studySub:"Useful for people who want to apply to Chinese schools, ask about scholarships or prepare for registration.",studyChecklistTitle:"Study checklist",businessTitle:"Business in China Preparation",businessSub:"Useful for Guangzhou, Yiwu, suppliers, wholesale purchase and shipping communication.",businessChecklistTitle:"Business checklist",workTitle:"Work with Chinese Company",workSub:"Useful for people working with Chinese bosses, engineers, supervisors or companies in Africa.",phrasesTitle:"Free Chinese Phrases",phrasesSub:"Daily Chinese for beginners. Use it as free traffic content.",templatesTitle:"Ready-to-copy Templates",templatesSub:"These templates are the real selling point. Free preview is shown. VIP unlocks more.",emailTitle:"School email template",supplierTitle:"Supplier WhatsApp template",copyEmailBtn:"Copy Template",copySupplierBtn:"Copy Template",vipTemplateTitle:"VIP Templates Preview",aiTitle:"AI Chinese Sentence Helper",aiSub:"V1.1 uses strong local templates. Later version can connect real AI API for unlimited sentence generation.",generateBtn:"Generate Chinese",quickTitle:"Quick generation",q1:"Ask school about scholarship",q2:"Ask supplier for lowest price",q3:"Chinese company interview",vipBadge:"VIP Preparation Kit",vipTitle:"Sell preparation, not only Chinese lessons",vipSub:"Users pay for ready-made China study, business and work templates.",plan1Badge:"Starter",plan1Title:"Chinese Phrase Pack",plan1Text:"100 Chinese phrases with pinyin, English and French.",plan1Btn:"Buy on WhatsApp",plan2Badge:"Best seller",plan2Title:"China Preparation Kit",plan2Text:"Study checklist, school emails, supplier scripts, Chinese phrases and 7-day plan.",plan2Btn:"Buy on WhatsApp",plan3Badge:"Advanced",plan3Title:"Business Buyer Kit",plan3Text:"Supplier negotiation, wholesale inquiry, sample checking and shipping communication templates.",plan3Btn:"Buy on WhatsApp",unlockTitle:"Member code unlock",unlockSub:"After payment, send a member code to the buyer.",unlockBtn:"Unlock VIP",vipContentTitle:"VIP content preview",riskText:"Disclaimer: ChinaGo AI only provides language learning, document checklist and communication templates. It does not guarantee visa approval, school admission, scholarship, employment or business results.",bottomLearn:"Free",bottomBuy:"Buy VIP"},fr:{heroSub:"Vous voulez étudier, travailler ou faire du business en Chine ? Obtenez des phrases chinoises, une liste de préparation, des modèles d'e-mails et des scripts business.",heroStudy:"Étudier en Chine",heroBusiness:"Business en Chine",navHome:"Accueil",navStudy:"Études",navBusiness:"Business",navWork:"Travail",navPhrases:"Chinois",navTemplates:"Modèles",navAI:"Assistant IA",navVIP:"VIP",homeBadge:"Système de préparation Chine",homeTitle:"Pas seulement apprendre le chinois. Préparez de vraies opportunités en Chine.",homeText:"Cet outil aide les utilisateurs africains à préparer les études, le business, le travail avec les entreprises chinoises et la communication quotidienne.",homeBuyBtn:"Voir les offres VIP",homeFreeBtn:"Utiliser les phrases gratuites",who1Title:"Étudiants",who1Text:"Questions de bourse, email école, chinois d'inscription, présentation et liste de préparation.",who2Title:"Acheteurs business",who2Text:"Messages fournisseurs, négociation, échantillons, livraison et rappels de risque de paiement.",who3Title:"Travailleurs",who3Text:"Phrases d'entretien, communication quotidienne, demande de congé et modèles de rapport.",whyTitle:"Pourquoi payer au lieu d'utiliser une IA gratuite ?",whyText:"Parce que tout est organisé par scénarios réels : études, business, travail et voyage. L'utilisateur copie directement les phrases, pinyin, emails et scripts WhatsApp.",studyTitle:"Préparation études en Chine",studySub:"Pour demander des écoles chinoises, poser des questions sur les bourses et préparer l'inscription.",studyChecklistTitle:"Liste études",businessTitle:"Préparation business en Chine",businessSub:"Pour Guangzhou, Yiwu, fournisseurs, achat en gros et transport.",businessChecklistTitle:"Liste business",workTitle:"Travailler avec une entreprise chinoise",workSub:"Pour travailler avec des patrons, ingénieurs ou superviseurs chinois en Afrique.",phrasesTitle:"Phrases chinoises gratuites",phrasesSub:"Chinois quotidien pour débutants. Sert de contenu gratuit pour attirer les utilisateurs.",templatesTitle:"Modèles prêts à copier",templatesSub:"Les modèles sont le vrai point de vente. Aperçu gratuit, VIP débloque plus.",emailTitle:"Modèle email école",supplierTitle:"Modèle WhatsApp fournisseur",copyEmailBtn:"Copier",copySupplierBtn:"Copier",vipTemplateTitle:"Aperçu modèles VIP",aiTitle:"Assistant phrase chinoise",aiSub:"V1.1 utilise des modèles locaux puissants. Plus tard, on peut connecter une vraie API IA.",generateBtn:"Générer chinois",quickTitle:"Génération rapide",q1:"Demander une bourse",q2:"Demander le prix minimum",q3:"Entretien entreprise chinoise",vipBadge:"Kit préparation VIP",vipTitle:"Vendez la préparation, pas seulement les cours chinois",vipSub:"Les utilisateurs paient pour des modèles prêts pour études, business et travail.",plan1Badge:"Débutant",plan1Title:"Pack phrases chinoises",plan1Text:"100 phrases chinoises avec pinyin, anglais et français.",plan1Btn:"Acheter WhatsApp",plan2Badge:"Meilleure vente",plan2Title:"Kit préparation Chine",plan2Text:"Liste études, emails école, scripts fournisseur, phrases chinoises et plan 7 jours.",plan2Btn:"Acheter WhatsApp",plan3Badge:"Avancé",plan3Title:"Kit acheteur business",plan3Text:"Négociation fournisseur, achat en gros, échantillons et livraison.",plan3Btn:"Acheter WhatsApp",unlockTitle:"Déblocage code membre",unlockSub:"Après paiement, envoyez un code membre à l'acheteur.",unlockBtn:"Débloquer VIP",vipContentTitle:"Aperçu contenu VIP",riskText:"Avertissement : ChinaGo AI fournit seulement apprentissage, liste de documents et modèles de communication. Il ne garantit pas visa, admission, bourse, emploi ou résultat commercial.",bottomLearn:"Gratuit",bottomBuy:"Acheter VIP"},zh:{heroSub:"想去中国留学、工作或做生意？这里提供中文短句、准备清单、学校邮件模板和商务沟通话术。",heroStudy:"中国留学",heroBusiness:"中国商务",navHome:"首页",navStudy:"留学",navBusiness:"商务",navWork:"工作",navPhrases:"中文",navTemplates:"模板",navAI:"AI助手",navVIP:"会员",homeBadge:"去中国准备系统",homeTitle:"不是单纯学中文，而是帮助用户准备去中国机会。",homeText:"这个工具帮助非洲用户准备中国留学、中国商务、中国公司工作和日常沟通。免费短句负责引流，VIP卖资料模板和实用话术。",homeBuyBtn:"查看会员套餐",homeFreeBtn:"使用免费中文短句",who1Title:"留学生",who1Text:"奖学金咨询、学校邮件、报到中文、自我介绍和资料准备清单。",who2Title:"商务采购人",who2Text:"供应商消息、砍价话术、样品检查、物流问题和付款风险提醒。",who3Title:"中国公司工作者",who3Text:"中国公司面试话术、日常工作沟通、请假模板和工作汇报模板。",whyTitle:"为什么用户不用免费AI，而可能付费？",whyText:"因为这里按真实场景整理：留学、商务、工作和旅行。用户不需要会提问，直接复制中文、拼音、邮件和 WhatsApp 话术就能用。",studyTitle:"中国留学准备",studySub:"适合想申请中国学校、咨询奖学金、准备报到注册的人。",studyChecklistTitle:"留学资料清单",businessTitle:"中国商务准备",businessSub:"适合广州、义乌、供应商、批发采购和物流沟通。",businessChecklistTitle:"商务准备清单",workTitle:"中国公司工作中文",workSub:"适合在非洲和中国老板、工程师、主管或公司一起工作的人。",phrasesTitle:"免费中文短句",phrasesSub:"适合初学者的日常中文，也可以作为免费引流内容。",templatesTitle:"可直接复制的模板",templatesSub:"模板才是真正的成交点。免费展示一部分，VIP解锁更多。",emailTitle:"学校联系邮件模板",supplierTitle:"供应商 WhatsApp 模板",copyEmailBtn:"复制模板",copySupplierBtn:"复制模板",vipTemplateTitle:"会员模板预览",aiTitle:"AI中文句子助手",aiSub:"V1.1 使用本地强模板。后期可以接入真实 AI API，实现无限句子生成。",generateBtn:"生成中文",quickTitle:"快速生成",q1:"咨询学校奖学金",q2:"询问供应商最低价",q3:"中国公司面试",vipBadge:"会员准备资料包",vipTitle:"卖准备方案，不只是卖中文课",vipSub:"用户真正付费的是中国留学、商务、工作模板。",plan1Badge:"入门",plan1Title:"中文短句包",plan1Text:"100句中文，带拼音、英文和法文。",plan1Btn:"WhatsApp购买",plan2Badge:"主推",plan2Title:"去中国准备包",plan2Text:"留学清单、学校邮件、供应商话术、中文短句和7天准备计划。",plan2Btn:"WhatsApp购买",plan3Badge:"高级",plan3Title:"商务采购包",plan3Text:"供应商砍价、批发询价、样品检查和物流沟通模板。",plan3Btn:"WhatsApp购买",unlockTitle:"会员码解锁",unlockSub:"用户付款后，把会员码发给买家。",unlockBtn:"解锁会员",vipContentTitle:"会员内容预览",riskText:"免责声明：ChinaGo AI 仅提供语言学习、资料清单和沟通模板，不保证签证通过、学校录取、奖学金、就业或商业结果。",bottomLearn:"免费",bottomBuy:"购买VIP"}};
